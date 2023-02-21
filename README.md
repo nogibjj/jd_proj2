@@ -1,6 +1,7 @@
-# rust-new-project-template
-A good starting point for a new Rust project
+# Project 2 
 
-## References
+My project 2 will be a microservice that provides details on specific NBA teams/players using [nba_api](https://github.com/swar/nba_api), an API client for the official NBA website. 
 
-* [rust-cli-template](https://github.com/kbknapp/rust-cli-template)
+Specific details to come, but there will be different endpoints that provides information accordingly
+
+Goal is to deploy it on Kubernetes / AWS. 

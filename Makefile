@@ -22,3 +22,9 @@ release:
 	cargo build --release
 
 all: format lint test run
+
+build:
+	docker build -t proj2 .
+
+rundocker:
+	docker run -it --rm -p 8080:8080 proj2
