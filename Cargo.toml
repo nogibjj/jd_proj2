@@ -7,8 +7,12 @@ edition = "2021"
 
 [dependencies]
 actix = "0.13.0"
-reqwest = "0.11.14"
+reqwest = {version="0.11.14", features = ["json", "blocking"] }
 serde_json = "1.0.93"
 tokio = { version = "1.25.0", features = ["macros", "rt-multi-thread"] }
 actix-web = "4"
-cpython = "0.7.1"
+serde = { version = "1.0", features = ["derive"] }
+dotenv = "0.15.0"
+base64 = "0.21.0"
+json= "*"
+select = "0.6"
