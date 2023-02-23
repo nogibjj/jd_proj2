@@ -1,7 +1,9 @@
 use base64::{engine::general_purpose, Engine};
 use reqwest::Client;
+use securestore::{KeySource, SecretsManager};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
+use std::path::Path;
 
 #[derive(Debug, Deserialize, Serialize)]
 struct AccessTokenResponse {
@@ -50,8 +52,13 @@ pub struct ExternalUrls {
 pub async fn get_tm_attraction_id(artist_name: String) -> Result<String, reqwest::Error> {
     let client = Client::new();
 
-    // fix this
-    let apikey = "U6kUZmyOuUivbUppCUTEE4GWRqrvpYzo";
+    let key_path = Path::new("secrets.key");
+    let sman = SecretsManager::load("secrets.json", KeySource::Path(key_path))
+        .expect("Failed to load secrets store!");
+    let api_key = sman
+        .get("api_key")
+        .expect("Couldn't get db_password from vault!");
+
 
     // find attraction id of artist using inputted keyword
     let path = "https://app.ticketmaster.com/discovery/v2/attractions.json";
@@ -62,7 +69,7 @@ pub async fn get_tm_attraction_id(artist_name: String) -> Result<String, reqwest
             ("keyword", artist_name.as_str()),
             ("classificationName", classfication),
             ("size", "1"),
-            ("apikey", apikey),
+            ("apikey", api_key.as_str()),
         ])
         .send()
         .await
@@ -79,7 +86,14 @@ pub async fn get_tm_events(attraction_id: &Value) -> Result<String, reqwest::Err
     // get events from attraction id, music, RTP, 25 mile radius
     // https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&dmaId=366&radius=25&size=10&attractionId=...&apikey=...
     let client = Client::new();
-    let apikey = "U6kUZmyOuUivbUppCUTEE4GWRqrvpYzo";
+
+    let key_path = Path::new("secrets.key");
+    let sman = SecretsManager::load("secrets.json", KeySource::Path(key_path))
+        .expect("Failed to load secrets store!");
+    let api_key = sman
+        .get("api_key")
+        .expect("Couldn't get api_key from vault!");
+
     let path = "https://app.ticketmaster.com/discovery/v2/events.json";
     let classfication = "music";
     let res_size = "5";
@@ -94,7 +108,7 @@ pub async fn get_tm_events(attraction_id: &Value) -> Result<String, reqwest::Err
             ("radius", radius),
             ("attractionId", attraction_id.as_str().unwrap()),
             ("size", res_size),
-            ("apikey", apikey),
+            ("apikey", api_key.as_str()),
         ])
         .send()
         .await
@@ -109,8 +123,17 @@ pub async fn get_tm_events(attraction_id: &Value) -> Result<String, reqwest::Err
 // function to get spotify access token
 pub async fn get_spotify_access_token() -> Result<String, reqwest::Error> {
     let client = Client::new();
-    let client_id = "7aa76b31d5aa4af1a2574aef95372498";
-    let client_secret = "fe9299cbcc3d4823bc2e0072a8d2f905";
+
+    let key_path = Path::new("secrets.key");
+    let sman = SecretsManager::load("secrets.json", KeySource::Path(key_path))
+        .expect("Failed to load secrets store!");
+    let client_id = sman
+        .get("client_id")
+        .expect("Couldn't get client_id from vault!");
+    let client_secret = sman
+        .get("client_secret")
+        .expect("Couldn't get client_secret from vault!");
+
     let body = "grant_type=client_credentials";
     let basic_auth = general_purpose::STANDARD.encode(format!("{client_id}:{client_secret}"));
 

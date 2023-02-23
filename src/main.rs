@@ -6,7 +6,6 @@ use jd_proj2::{
 use reqwest::StatusCode;
 use serde_json::Value;
 
-
 #[get("/")]
 async fn welcome() -> impl Responder {
     HttpResponse::Ok().body("Hello! You can find details here on concerts for your favorite artists coming to the Durham area!")
@@ -71,7 +70,7 @@ async fn artist(artist_name: web::Path<String>) -> impl Responder {
                     genres_string.push_str(", ");
                 }
 
-                // format string for each artist 
+                // format string for each artist
                 let artist_string = format!(
                     "\nArtist: {name}
                     Link to Image: {image}
@@ -89,7 +88,6 @@ async fn artist(artist_name: web::Path<String>) -> impl Responder {
     }
 }
 
-
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     //add a print message to the console that the service is running
@@ -99,4 +97,3 @@ async fn main() -> std::io::Result<()> {
         .run()
         .await
 }
-
