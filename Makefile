@@ -24,7 +24,13 @@ release:
 all: format lint test run
 
 build:
-	docker build -t proj2 .
+	docker build -t jd_proj2 .
 
 rundocker:
-	docker run -it --rm -p 8080:8080 proj2
+	docker run -it --rm -p 8080:8080 jd_proj2
+
+# build-hub:
+# 	docker build -t chloechen79/imdb .
+
+# push-hub:
+# 	docker push chloechen79/imdb:latest
