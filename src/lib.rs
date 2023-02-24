@@ -59,7 +59,6 @@ pub async fn get_tm_attraction_id(artist_name: String) -> Result<String, reqwest
         .get("api_key")
         .expect("Couldn't get db_password from vault!");
 
-
     // find attraction id of artist using inputted keyword
     let path = "https://app.ticketmaster.com/discovery/v2/attractions.json";
     let classfication = "music";
@@ -99,6 +98,7 @@ pub async fn get_tm_events(attraction_id: &Value) -> Result<String, reqwest::Err
     let res_size = "5";
     let dma_id = "366";
     let radius = "25";
+    let event_type = "event";
 
     let response: String = client
         .get(path)
@@ -108,6 +108,7 @@ pub async fn get_tm_events(attraction_id: &Value) -> Result<String, reqwest::Err
             ("radius", radius),
             ("attractionId", attraction_id.as_str().unwrap()),
             ("size", res_size),
+            ("type", event_type),
             ("apikey", api_key.as_str()),
         ])
         .send()
