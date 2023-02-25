@@ -142,7 +142,7 @@ pub async fn get_tm_attraction_id(artist_name: String) -> Result<String, reqwest
         .expect("Failed to load secrets store!");
     let api_key = sman
         .get("api_key")
-        .expect("Couldn't get db_password from vault!");
+        .expect("Couldn't get api_key from vault!");
 
     // find attraction id of artist using inputted keyword
     let path = "https://app.ticketmaster.com/discovery/v2/attractions.json";
