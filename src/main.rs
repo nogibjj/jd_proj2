@@ -6,6 +6,7 @@ use ticketmaster::{
     get_tm_events, L0, L1,
 };
 use tokio::time::sleep;
+use actix_web::rt::time::Instant;
 
 #[get("/")]
 async fn welcome() -> impl Responder {
@@ -14,12 +15,17 @@ async fn welcome() -> impl Responder {
 
 #[get("/artist/{artist_name}")]
 async fn artist(artist_name: web::Path<String>) -> impl Responder {
+    // start timer
+    let start = Instant::now();
     let attraction_res = get_tm_attraction_id(artist_name.to_string()).await.unwrap();
 
     let av: Value = serde_json::from_str(&attraction_res).unwrap();
 
     // test if 0, print out maybe check spelling, or try another artist
     if av["page"]["totalElements"] == 0 {
+        // end timer 
+        let duration = start.elapsed();
+        println!("Time elapsed in artist-not-found path is: {:?}", duration);
         HttpResponse::build(StatusCode::NOT_FOUND)
             .body("{artist_name} is not found. Please check spelling and try again.")
     } else {
@@ -100,6 +106,10 @@ async fn artist(artist_name: web::Path<String>) -> impl Responder {
             }
             let final_string = artist_strings.join("");
 
+            // end timer 
+            let duration = start.elapsed();
+            println!("Time elapsed in artist-event path is: {:?}", duration);
+
             HttpResponse::Ok().body(final_string)
         }
         // if there are no events, find similar artists and return their info from spotify
@@ -137,6 +147,10 @@ async fn artist(artist_name: web::Path<String>) -> impl Responder {
             }
 
             let final_string = event_strings.join("");
+
+            // end timer 
+            let duration = start.elapsed();
+            println!("Time elapsed in artist-spotify path is: {:?}", duration);
 
             HttpResponse::Ok().body(final_string)
         }
