@@ -27,7 +27,7 @@ async fn artist(artist_name: web::Path<String>) -> impl Responder {
         let duration = start.elapsed();
         println!("Time elapsed in artist-not-found path is: {:?}", duration);
         HttpResponse::build(StatusCode::NOT_FOUND)
-            .body("{artist_name} is not found. Please check spelling and try again.")
+            .body(format!("{artist_name} is not found. Please check spelling and try again."))
     } else {
         // capitalize each word in artist name
         let artist_name_cap = artist_name
