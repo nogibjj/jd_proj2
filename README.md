@@ -11,19 +11,19 @@ My project 2 is a microservice that finds concerts in the Durham area from Ticke
 ## Endpoints 
 1. `/`: Welcome page
 
-    **ADD IMAGE**
+    <img width="550" alt="image" src="https://user-images.githubusercontent.com/86393045/221379875-114d32cc-8528-4c6d-be7c-cf34a145b48f.png">
 
 
 2. `/artist/{artist_name}`: Uses artist name to search for concerts - returns either events found on Ticketmaster, or related artists if no events are found 
 
     For example, if I want to find Bruce Springsteen concerts, I would use path `/artist/bruce springsteen`. In this case, there is a concert in the area, and the microservice returns details:
 
-   <img width="800" alt="image" src="https://user-images.githubusercontent.com/86393045/221379688-d47bd4e8-5adf-47ca-96ea-bab86abdbf89.png">
+   <img width="900" alt="image" src="https://user-images.githubusercontent.com/86393045/221379688-d47bd4e8-5adf-47ca-96ea-bab86abdbf89.png">
 
 
     Another example is if I'm curious if Adele is coming to Durham, i.e. `/artist/adele`. Here, Adele has  no concerts, and so a list of related artists are provided for the user to check out (and hopefully find another artist that they can search for concerts):
 
-    **ADD IMAGE**
+    <img width="750" alt="image" src="https://user-images.githubusercontent.com/86393045/221379862-ea5fb1f6-0d3d-4364-bcb2-b7f20a75bbd2.png">
 
 
     And if I accidentally spell her name wrong, i.e. `/artist/adelle`, it will return to try again: 
