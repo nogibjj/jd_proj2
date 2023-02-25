@@ -18,7 +18,7 @@ My project 2 is a microservice that finds concerts in the Durham area from Ticke
 
     For example, if I want to find Bruce Springsteen concerts, I would use path `/artist/bruce springsteen`. In this case, there is a concert in the area, and the microservice returns details:
 
-    **ADD IMAGE** 
+   <img width="800" alt="image" src="https://user-images.githubusercontent.com/86393045/221379688-d47bd4e8-5adf-47ca-96ea-bab86abdbf89.png">
 
 
     Another example is if I'm curious if Adele is coming to Durham, i.e. `/artist/adele`. Here, Adele has  no concerts, and so a list of related artists are provided for the user to check out (and hopefully find another artist that they can search for concerts):
@@ -27,8 +27,8 @@ My project 2 is a microservice that finds concerts in the Durham area from Ticke
 
 
     And if I accidentally spell her name wrong, i.e. `/artist/adelle`, it will return to try again: 
-
-     **ADD IMAGE**
+    
+    <img width="600" alt="image" src="https://user-images.githubusercontent.com/86393045/221379674-5bca3456-bb2d-4e01-bf87-f091c7b5dad6.png">
 
     
 
@@ -86,12 +86,7 @@ My project 2 is a microservice that finds concerts in the Durham area from Ticke
 ## Benchmarking
 The below shows the timing for the different possibilities in the `/artist/{artist_name}` path. The base path is not shown as it is a trivial case. 
 
-1. Artist name not found 
-    **ADD IMAGE**
-2. Concerts found 
-    **ADD IMAGE**
-3. No concerts found, related artists recommended 
-    **ADD IMAGE**
+<img width="400" alt="image" src="https://user-images.githubusercontent.com/86393045/221379680-1ac4e746-1c41-4f25-b640-d00dc24d3386.png">
 
 
 ## References
