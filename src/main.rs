@@ -1,10 +1,10 @@
 use actix_web::{get, web, App, HttpResponse, HttpServer, Responder};
-use ticketmaster::{
-    get_spotify_access_token, get_spotify_id, get_spotify_related_artists, get_tm_attraction_id,
-    get_tm_events, L0, L1
-};
 use reqwest::StatusCode;
 use serde_json::Value;
+use ticketmaster::{
+    get_spotify_access_token, get_spotify_id, get_spotify_related_artists, get_tm_attraction_id,
+    get_tm_events, L0, L1,
+};
 use tokio::time::sleep;
 
 #[get("/")]
