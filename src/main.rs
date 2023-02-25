@@ -43,8 +43,6 @@ async fn artist(artist_name: web::Path<String>) -> impl Responder {
 
         let event_res = get_tm_events(attraction_id).await.unwrap();
 
-        println!("{event_res}");
-
         // change format of this
         let ev: Value = serde_json::from_str(&event_res).unwrap();
 
