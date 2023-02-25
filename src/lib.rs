@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::path::Path;
 
+// structure for spotify access token json data
 #[derive(Debug, Deserialize, Serialize)]
 struct AccessTokenResponse {
     access_token: String,
@@ -12,6 +13,7 @@ struct AccessTokenResponse {
     expires_in: u32,
 }
 
+// structure for spotify related artist json data
 #[derive(Debug, Deserialize, Serialize)]
 pub struct L0 {
     pub artists: Vec<Artist>,
@@ -46,6 +48,89 @@ pub struct Followers {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct ExternalUrls {
     pub spotify: String,
+}
+
+// structure for event json data
+#[derive(Debug, Deserialize, Serialize)]
+pub struct L1 {
+    pub _embedded: Results,
+    pub page: Page,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Results {
+    pub events: Vec<Event>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Event {
+    pub name: String,
+    pub url: String,
+    pub dates: Dates,
+    pub priceRanges: Vec<PriceRange>,
+    pub _embedded: Embedded,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Dates {
+    pub start: Start,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Start {
+    pub localDate: String,
+    pub localTime: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct PriceRange {
+    pub min: f32,
+    pub max: f32,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Embedded {
+    pub venues: Vec<Venue>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Venue {
+    pub name: String,
+    pub postalCode: String,
+    pub address: Address,
+    pub city: City,
+    pub state: State,
+    pub country: Country,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct City {
+    pub name: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Address {
+    pub line1: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct State {
+    pub name: String,
+    pub stateCode: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Country {
+    pub name: String,
+    pub countryCode: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Page {
+    pub size: u32,
+    pub totalElements: u32,
+    pub totalPages: u32,
+    pub number: u32,
 }
 
 // function to get ticketmaster attraction id

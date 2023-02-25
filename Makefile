@@ -23,14 +23,18 @@ release:
 
 all: format lint test run
 
+install:
+	cargo clean &&\
+		cargo build -j 1
+
 build:
-	docker build -t jd_proj2 .
+	docker build -t ticketmaster .
+
+build-hub:
+	docker build -t jacdu/ticketmaster-concert .
+
+push-hub:
+	docker push jacdu/ticketmaster-concert:latest
 
 rundocker:
-	docker run -it --rm -p 8080:8080 jd_proj2
-
-# build-hub:
-# 	docker build -t chloechen79/imdb .
-
-# push-hub:
-# 	docker push chloechen79/imdb:latest
+	docker run -it --rm -p 8080:8080 ticketmaster
