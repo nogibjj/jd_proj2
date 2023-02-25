@@ -21,8 +21,7 @@ async fn artist(artist_name: web::Path<String>) -> impl Responder {
     // test if 0, print out maybe check spelling, or try another artist
     if av["page"]["totalElements"] == 0 {
         let string = format!("{artist_name} is not found. Please check spelling and try again.");
-        HttpResponse::build(StatusCode::NOT_FOUND)
-            .body(string)
+        HttpResponse::build(StatusCode::NOT_FOUND).body(string)
     } else {
         // capitalize each word in artist name
         let artist_name_cap = artist_name
