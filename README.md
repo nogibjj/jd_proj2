@@ -5,7 +5,7 @@ My project 2 is a microservice that finds concerts in the Durham area from Ticke
 
 ## Architecture 
 
-**ADD IMAGE**       
+<img width="800" alt="image" src="https://user-images.githubusercontent.com/86393045/221381284-d2c08000-be4a-4e01-9192-4baf9946d4a6.png">      
 
 
 ## Endpoints 
