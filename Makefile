@@ -42,7 +42,7 @@ build-hub:
 	docker build -t jacdu/ticketmaster-concert .
 
 push-hub:
-	docker push jacdu/ticketmaster-concert:latest
+	docker push jacdu/ticketmaster-concert:first-image-push
 
 rundocker:
 	docker run -it --rm -p 8080:8080 ticketmaster

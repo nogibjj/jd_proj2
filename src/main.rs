@@ -1,3 +1,4 @@
+extern crate actix_web;
 use actix_web::{get, web, App, HttpResponse, HttpServer, Responder};
 use reqwest::StatusCode;
 use serde_json::Value;
