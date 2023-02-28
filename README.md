@@ -73,7 +73,7 @@ My project 2 is a microservice that finds concerts in the Durham area from Ticke
         2. Create a deployment `kubectl create deployment ticketmaster image=registry.hub.docker.com/jacdu/ticketmaster`
         3. View deployment: `kubectl get deployments`
         4. Create service and expose it: `kubectl expose deployment ticketmaster --type=LoadBalancer --port=8080`
-        5. View services: `kubectl get service ticketmaster`
+        5. View services: `kubectl get service ticketmaster-concert:first-image-push`
         6. `minikube service ticketmaster --url`
         7. Curl web service: i.e. `curl http://192.168.49.2:30082`
         8. Clean up 
